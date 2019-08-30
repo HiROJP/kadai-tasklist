@@ -1,33 +1,16 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
-  <h1>タスク一覧</h1>
-  <% if @tasks.any? %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>ステータス</th>
-          <th>タスク</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @tasks.each do |task| %>
-          <tr>
-            <td><%= link_to task.id, task %></td>
-            <td><%= task.status %></td>
-            <td><%= task.content %></td>
-            <!-- &gt; は、 > を HTML で表示させるための記号です。--> 
-            <!--<li><%= link_to task.id, task %> : <%= task.status %> &gt; <%= task.content %></li> -->
-            
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div>
-      <%= paginate @tasks %>
+
+  <div class="row">
+    <div class="col-md-12 pb-3">
+      <h1>タスク新規作成ページ</h1>
+      <%= render 'form', task: @task %>
     </div>
-  <% end %>
-  <%= link_to '新規タスクの投稿', new_task_path, class: "btn btn-primary" %>
+    <div class="col-md-12 pt-2">
+      <%= render 'tasks/tasks', tasks: @tasks %>
+    </div>
+  </div>
+  
+  
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">
